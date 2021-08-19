@@ -204,7 +204,7 @@ ggplot(data = ww_lizards, aes(y = total_length, x = weight)) +
 ```
 
 Filter for only Europe. Create a scatterplot of gdpPercap (x) and lifeExp (y), labeled by the country name.
-```{r}
+```{r, fig.alt = "Scatterplot showing a positive relationship between gdp per capita and life expectancy for European countries."}
 # View(gapminder)
 
 eur_gapminder <- gapminder %>% 
