@@ -148,3 +148,43 @@ ggplot(data = lizard_counts, aes(x = date, y = n)) +
                date_labels = "%Y") #%Y specifies 4 digit year, %y would do 2 digit year, etc. 
 ```
 
+```{r}
+ggplot(data = lizards, aes(x = total_length, y = weight)) +
+  geom_point(aes(color = weight)) +
+  scale_color_stepsn(colors = c("green", "blue", "purple"), 
+                     breaks = c(0, 20, 40, 50, 60))
+```
+
+
+### Update a color scheme using a palette in paletteer
+Make a horizontal boxplot with common_name on the y-axis, total_length on the x-axis, with color changing based on common_name.
+
+```{r}
+lizards_fct <- lizards %>% 
+  mutate(common_name = fct_reorder(common_name, total_length, .fun = median))
+
+ggplot(data = lizards_fct, aes(y = common_name, x = total_length)) +
+  geom_boxplot(aes(fill = common_name), show.legend = FALSE) +
+  scale_fill_paletteer_d(palette = "calecopal::sage")
+```
+
+
+```{r}
+ggplot(data = lizards, aes(x = total_length, y = weight)) +
+  geom_point() +
+  theme(
+     panel.background = element_rect(fill = "yellow", 
+                                     color = "purple",
+                                     size = 10),
+    # panel.grid.major.x = element_line(color = "red"),
+    # panel.grid.minor.x = element_line(color = "green"),
+    # panel.grid.major = element_line(color = "blue"),
+    # panel.grid.minor.y = element_line(color = "magenta")
+    panel.grid = element_blank(), # gets rid of gridlines.
+    axis.text.x = element_text(color = "orange"),
+    axis.title = element_text(color = "green", size = 15)
+  )
+```
+
+
+
